@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>TrainApp — Smart Training System (PRO v3.0 Verified)</title>
+<title>TrainApp — Smart Training System (PRO Final)</title>
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -11,25 +11,17 @@
 
 <style>
   :root {
-    --primary: #0284c7;
-    --primary-dark: #0369a1;
-    --accent: #38bdf8;
-    --recovery: #8b5cf6;
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-    --text: #f8fafc;
-    --text-muted: #cbd5e1;
-    --card-bg: rgba(10, 16, 30, 0.90);
-    --card-border: rgba(56, 189, 248, 0.3);
+    --primary: #0284c7; --primary-dark: #0369a1; --accent: #38bdf8;
+    --recovery: #8b5cf6; --success: #10b981; --danger: #ef4444;
+    --warning: #f59e0b; --text: #f8fafc; --text-muted: #cbd5e1;
+    --card-bg: rgba(10, 16, 30, 0.90); --card-border: rgba(56, 189, 248, 0.3);
     --box-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #060b18; background-size: cover; background-position: center;
-    background-attachment: fixed; color: var(--text); margin: 0; padding: 10px; direction: rtl; line-height: 1.45;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #060b18; color: var(--text); margin: 0; padding: 10px; direction: rtl; line-height: 1.45;
   }
   body::before {
     content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -45,9 +37,9 @@
   label { font-size: 0.82rem; font-weight: 600; color: var(--text); }
   input, select, textarea {
     width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--card-border);
-    background: rgba(8, 14, 28, 0.9); color: #fff; font-size: 0.92rem; font-family: inherit;
+    background: rgba(8, 14, 28, 0.9); color: #fff; font-size: 0.92rem;
   }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+  input:focus, select:focus { outline: none; border-color: var(--accent); }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
   .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 6px; margin-top: 4px; }
   .choice-label {
@@ -55,27 +47,23 @@
     background: rgba(15, 23, 42, 0.85); border: 1px solid var(--card-border); padding: 8px 10px; border-radius: 8px; cursor: pointer;
   }
   .focus-choice { background: rgba(14, 116, 144, 0.25) !important; border-color: #38bdf8 !important; }
-  .danger-choice { background: rgba(69, 10, 10, 0.8) !important; border-color: #ef4444 !important; color: #fca5a5; font-weight: bold; }
-  .notice-box { background: rgba(66, 32, 6, 0.7); border: 1px solid #ca8a04; color: #fef08a; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; margin-bottom: 12px; }
-  .red-flag-box { background: rgba(69, 10, 10, 0.6); border: 1px solid #ef4444; padding: 12px 14px; border-radius: 8px; font-size: 0.84rem; color: #fca5a5; margin-bottom: 12px; }
+  .danger-choice { background: rgba(69, 10, 10, 0.8) !important; border-color: #ef4444 !important; color: #fca5a5; }
   .btn {
     padding: 10px 14px; border-radius: 8px; border: none; background: var(--primary);
     color: #fff; font-size: 0.90rem; font-weight: bold; cursor: pointer; text-align: center;
     min-height: 40px; display: inline-flex; align-items: center; justify-content: center;
   }
-  .btn:hover { background: var(--primary-dark); }
   .btn-success { background: var(--success); }
   .btn-secondary { background: #334155; }
   .btn-danger { background: var(--danger); }
-  .btn-warning { background: var(--warning); color: #000; }
   .btn-recovery { background: #7c3aed; color: #fff; }
   .btn-full { width: 100%; margin-top: 6px; }
   .hidden { display: none !important; }
-  .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+  .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 12px; }
   .user-badge { display: flex; align-items: center; gap: 8px; }
   .avatar-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); background: #1e293b; }
-  .brand-logo-frame { display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent); border-radius: 12px; background: #0f172a; width: 68px; height: 68px; flex-shrink: 0; }
   .nav-tabs, .sub-tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
+  .nav-tabs::-webkit-scrollbar, .sub-tabs::-webkit-scrollbar { display: none; }
   .nav-tab, .sub-tab { flex: 1; min-width: 82px; padding: 10px 8px; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); color: var(--text-muted); border-radius: 8px; font-size: 0.82rem; font-weight: bold; cursor: pointer; text-align: center; white-space: nowrap; }
   .nav-tab.active { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #fff; border-color: var(--accent); }
   .sub-tab.active { background: var(--accent); color: #060b18; border-color: var(--accent); }
@@ -88,99 +76,87 @@
   .macro-pill { background: rgba(30, 41, 59, 0.8); padding: 6px; border-radius: 6px; }
   .macro-pill .val { font-size: 1.1rem; font-weight: bold; color: var(--accent); }
   .macro-pill .lbl { font-size: 0.7rem; color: var(--text-muted); }
-  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center; padding: 10px; z-index: 120; }
 </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- מסך אימות והרשמה -->
+  <!-- מסך אימות -->
   <div id="authScreen" class="card">
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px; justify-content: center;">
-      <div class="brand-logo-frame">
-        <svg width="46" height="46" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 32 H80 M50 32 V74 M32 74 H68" stroke="#38bdf8" stroke-width="8" stroke-linecap="round"/>
-          <circle cx="50" cy="18" r="6" fill="#38bdf8" />
-        </svg>
-      </div>
-      <div style="display: flex; flex-direction: column; text-align: right; direction: ltr;">
-        <span style="font-size: 1.65rem; font-weight: 900; color: #fff;">Train<span style="color: #38bdf8;">App</span> PRO</span>
-        <span style="font-size: 0.68rem; font-weight: 600; color: #94a3b8; text-transform: uppercase;">Smart Training System</span>
-      </div>
+    <div style="text-align:center; margin-bottom:14px;">
+      <h1 style="margin:0; font-size: 1.8rem; color:#fff;">Train<span style="color:var(--accent);">App</span> PRO</h1>
+      <span style="font-size:0.8rem; color:var(--text-muted);">מערכת אימונים ותזונה מתקדמת</span>
     </div>
-
-    <div class="sub-tabs" style="margin-bottom:14px;">
-      <div class="sub-tab active" id="authModeLoginBtn" onclick="switchAuthMode('login')">🔑 כניסת מתאמן קיים</div>
-      <div class="sub-tab" id="authModeRegBtn" onclick="switchAuthMode('register')">✨ רישום מתאמן חדש</div>
+    <div class="sub-tabs">
+      <div class="sub-tab active" id="authModeLoginBtn" onclick="switchAuthMode('login')">🔑 כניסה</div>
+      <div class="sub-tab" id="authModeRegBtn" onclick="switchAuthMode('register')">✨ רישום</div>
     </div>
-
     <div id="loginFormSection">
-      <div class="form-group"><label>שם משתמש (User ID):</label><input type="text" id="authUsername" value="Sagi1977"></div>
-      <div class="form-group"><label>סיסמה:</label><input type="password" id="authPassword" placeholder="הזן סיסמה" value="123"></div>
+      <div class="form-group"><label>שם משתמש:</label><input type="text" id="authUsername" value="Sagi1977"></div>
+      <div class="form-group"><label>סיסמה:</label><input type="password" id="authPassword" value="123"></div>
       <button type="button" class="btn btn-full" onclick="loginUser()">התחבר לחשבון</button>
     </div>
-
     <div id="regFormSection" class="hidden">
-      <div class="form-group"><label>שם משתמש חדש:</label><input type="text" id="regUsername" placeholder="למשל: sagi1977"></div>
-      <div class="form-group"><label>סיסמה:</label><input type="password" id="regPassword" placeholder="הזן סיסמה"></div>
-      <div class="form-group"><label>אימות סיסמה:</label><input type="password" id="regPasswordConfirm" placeholder="הזן שוב סיסמה"></div>
+      <div class="form-group"><label>שם משתמש חדש:</label><input type="text" id="regUsername"></div>
+      <div class="form-group"><label>סיסמה:</label><input type="password" id="regPassword"></div>
       <button type="button" class="btn btn-success btn-full" onclick="registerNewUser()">המשך למילוי שאלון</button>
     </div>
   </div>
 
-  <!-- מסך שאלון מקיף מלא (v3.0) -->
+  <!-- מסך שאלון מקיף 7 חלקים -->
   <div id="questionnaireScreen" class="card hidden">
     <div class="top-bar">
       <span id="qUserBadge" style="font-weight:bold; color:var(--accent);">מתאמן:</span>
       <button type="button" class="btn btn-secondary" style="padding:4px 8px; font-size:0.8rem;" onclick="cancelQuestionnaireEdit()">חזור למערכת</button>
     </div>
-    <h2>שאלון אפיון אישי לבניית תוכנית דינמית (v3.0 מלא)</h2>
-    <div class="notice-box">שאלון מקצועי מקיף הכולל מטרות, מגבלות רפואיות/מפרקיות, ציוד IMBODY והעדפות תדירות. מוגן מפני שגיאות `undefined`.</div>
+    <h2>שאלון אפיון אישי (7 חלקים)</h2>
 
     <form onsubmit="event.preventDefault(); processAndSaveFullQuestionnaire();">
       <div class="exercise-box">
         <h4>חלק א': פרופיל אישי בסיסי</h4>
         <div class="grid">
-          <div class="form-group"><label>שם:</label><input type="text" id="p_name" value="שגיא"></div>
-          <div class="form-group"><label>מגדר:</label><select id="p_gender"><option value="זכר" selected>זכר</option><option value="נקבה">נקבה</option></select></div>
+          <div class="form-group"><label>שם:</label><input type="text" id="p_name"></div>
+          <div class="form-group"><label>מגדר:</label><select id="p_gender"><option value="זכר">זכר</option><option value="נקבה">נקבה</option></select></div>
           <div class="form-group"><label>גיל:</label><input type="number" id="p_age" value="47"></div>
           <div class="form-group"><label>גובה (ס"מ):</label><input type="number" id="p_height" value="178"></div>
           <div class="form-group"><label>משקל נוכחי (ק"ג):</label><input type="number" id="p_weight" value="85"></div>
-          <div class="form-group"><label>היקף מותן (ס"מ):</label><input type="text" id="p_waist" value="90"></div>
+          <div class="form-group"><label>היקף מותן:</label><input type="text" id="p_waist" value="90"></div>
         </div>
       </div>
 
       <div class="exercise-box">
-        <h4>חלק ב': יעדים וחלקי גוף למיקוד</h4>
+        <h4>חלק ב': יעדים ומיקוד</h4>
         <div class="form-group">
-          <label>מטרות-על מובילות:</label>
+          <label>מטרות-על:</label>
           <div class="checkbox-grid">
-            <label class="choice-label"><input type="checkbox" name="goals" value="ירידה במשקל / חיטוב" checked> ירידה במשקל וחיטוב</label>
-            <label class="choice-label"><input type="checkbox" name="goals" value="עלייה במסת שריר וכוח" checked> עלייה במסת שריר וכוח</label>
-            <label class="choice-label"><input type="checkbox" name="goals" value="שיפור יציבה ושחרור כאבים" checked> יציבה וגמישות</label>
+            <label class="choice-label"><input type="checkbox" name="goals" value="ירידה במשקל / חיטוב" checked> חיטוב וירידה באחוזי שומן</label>
+            <label class="choice-label"><input type="checkbox" name="goals" value="עלייה במסת שריר וכוח" checked> מסת שריר וכוח</label>
+            <label class="choice-label"><input type="checkbox" name="goals" value="שיפור יציבה"> שיפור יציבה וגמישות</label>
           </div>
         </div>
         <div class="form-group" style="margin-top:8px;">
-          <label>חלקי גוף למיקוד:</label>
+          <label>אזורים למיקוד:</label>
           <div class="checkbox-grid">
             <label class="choice-label focus-choice"><input type="checkbox" name="focus_areas" value="בטן ושרירי ליבה" checked> בטן וליבה</label>
-            <label class="choice-label focus-choice"><input type="checkbox" name="focus_areas" value="ישבן וירכיים אחוריות" checked> ישבן וירכיים</label>
-            <label class="choice-label focus-choice"><input type="checkbox" name="focus_areas" value="גב עליון ורחב גבי" checked> גב עליון ושכמות</label>
+            <label class="choice-label focus-choice"><input type="checkbox" name="focus_areas" value="חזה וכתפיים" checked> חזה וכתפיים</label>
+            <label class="choice-label focus-choice"><input type="checkbox" name="focus_areas" value="ישבן וירכיים"> ישבן ורגליים</label>
+            <label class="choice-label focus-choice"><input type="checkbox" name="focus_areas" value="גב עליון" checked> גב עליון</label>
           </div>
         </div>
       </div>
 
       <div class="exercise-box">
-        <h4>חלק ג' + ד': בריאות, מפרקים וציוד זמין</h4>
-        <div class="red-flag-box">
-          <b>דגלים אדומים / רגישויות:</b>
-          <div class="checkbox-grid" style="margin-top:6px;">
-            <label class="choice-label danger-choice"><input type="checkbox" name="red_flags" value="סחרחורות"> סחרחורות</label>
-            <label class="choice-label danger-choice"><input type="checkbox" name="red_flags" value="נימול"> נימול / הקרנה</label>
-          </div>
+        <h4>חלק ג': ניסיון ופעילות</h4>
+        <div class="grid">
+          <div class="form-group"><label>ותק אימוני:</label><select id="p_experience"><option value="מתחיל">מתחיל</option><option value="בינוני" selected>בינוני (1-3 שנים)</option><option value="מתקדם">מתקדם</option></select></div>
+          <div class="form-group"><label>פעילות יומיומית (NEAT):</label><select id="p_daily_activity"><option value="יושבני">יושבני (משרד)</option><option value="פעיל">פעיל</option></select></div>
         </div>
-        <div class="form-group" style="margin-top:8px;">
+      </div>
+
+      <div class="exercise-box">
+        <h4>חלק ד': בריאות, מפרקים וציוד</h4>
+        <div class="form-group">
           <label>כאבי מפרקים / רגישויות:</label>
           <div class="checkbox-grid">
             <label class="choice-label"><input type="checkbox" name="joint_pains" value="צוואר ועורף" checked> צוואר ועורף (דגש מנוחה)</label>
@@ -193,15 +169,37 @@
           <div class="checkbox-grid">
             <label class="choice-label"><input type="checkbox" name="equip" value="IMBODY Power S Pro" checked> IMBODY Power S Pro</label>
             <label class="choice-label"><input type="checkbox" name="equip" value="הליכון ביתי / ריצה בחוץ" checked> הליכון / ריצה בחוץ</label>
-            <label class="choice-label"><input type="checkbox" name="equip" value="בריכת שחייה"> בריכת שחייה</label>
           </div>
         </div>
-        <div class="form-group" style="margin-top:8px;">
-          <label>תדירות מועדפת בשבוע:</label>
-          <select id="p_frequency">
-            <option value="4-5 ימים בשבוע" selected>4–5 ימים בשבוע (4 אימוני כוח A,B,C,D בשילוב סופ"ש)</option>
-            <option value="3-4 ימים בשבוע">3–4 ימים בשבוע</option>
-          </select>
+      </div>
+
+      <div class="exercise-box">
+        <h4>חלק ה': תדירות וזמנים</h4>
+        <div class="grid">
+          <div class="form-group">
+            <label>תדירות שבועית:</label>
+            <select id="p_frequency">
+              <option value="3 ימים בשבוע">3 ימים בשבוע</option>
+              <option value="4-5 ימים בשבוע" selected>4–5 ימים בשבוע (מומלץ)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>משך אימון:</label><select id="p_duration"><option value="30-40 דקות" selected>30–40 דקות</option><option value="45-60 דקות">45–60 דקות</option></select></div>
+        </div>
+      </div>
+
+      <div class="exercise-box">
+        <h4>חלק ו': אורח חיים ושינה</h4>
+        <div class="grid">
+          <div class="form-group"><label>שעות שינה:</label><select id="p_sleep_hours"><option value="פחות מ-6">פחות מ-6 שעות</option><option value="6-8 שעות" selected>6–8 שעות</option></select></div>
+          <div class="form-group"><label>רמת סטרס (1-10):</label><input type="number" id="p_stress" value="5" min="1" max="10"></div>
+        </div>
+      </div>
+
+      <div class="exercise-box">
+        <h4>חלק ז': תזונה והרגלים</h4>
+        <div class="grid">
+          <div class="form-group"><label>סגנון תזונה מועדף:</label><select id="p_diet_precision"><option value="גמיש" selected>גמיש ומודולרי</option><option value="מדויק">מדויק (ספירת קלוריות)</option></select></div>
+          <div class="form-group"><label>כמות מים ביום:</label><select id="p_water"><option value="עד 1 ליטר">עד 1 ליטר</option><option value="מעל 2 ליטר" selected>מעל 2 ליטר</option></select></div>
         </div>
       </div>
 
@@ -215,12 +213,12 @@
       <div class="user-badge">
         <img id="userAvatar" class="avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>">
         <div>
-          <span style="font-weight:bold; color:var(--accent); font-size:0.95rem;" id="dashUsernameTitle"></span>
+          <span style="font-weight:bold; color:var(--accent);" id="dashUsernameTitle"></span>
           <div style="display:flex; gap:6px;">
-            <label for="avatarUploadInput" style="font-size:0.72rem; color:var(--accent); cursor:pointer; text-decoration:underline;">📷 תמונה</label>
+            <label for="avatarUploadInput" style="font-size:0.72rem; color:var(--accent); cursor:pointer;">📷 תמונה</label>
             <input type="file" id="avatarUploadInput" accept="image/*" class="hidden" onchange="uploadUserAvatar(event)">
             <span style="font-size:0.72rem; color:var(--text-muted);">|</span>
-            <span style="font-size:0.72rem; color:var(--warning); cursor:pointer; text-decoration:underline;" onclick="editQuestionnaire()">📝 ערוך שאלון</span>
+            <span style="font-size:0.72rem; color:var(--warning); cursor:pointer;" onclick="editQuestionnaire()">📝 שאלון</span>
           </div>
         </div>
       </div>
@@ -228,57 +226,56 @@
     </div>
 
     <div class="nav-tabs">
-      <div class="nav-tab active" onclick="switchTab('tabWorkouts', this)">🏋️ האימונים שלי</div>
-      <div class="nav-tab" onclick="switchTab('tabNutrition', this)">🥗 תזונה ומנות</div>
-      <div class="nav-tab" onclick="switchTab('tabHistory', this)">📅 יומן מעקב</div>
+      <div class="nav-tab active" onclick="switchTab('tabWorkouts', this)">🏋️ אימונים</div>
+      <div class="nav-tab" onclick="switchTab('tabNutrition', this)">🥗 תזונה</div>
+      <div class="nav-tab" onclick="switchTab('tabHistory', this)">📅 מעקב</div>
     </div>
 
     <!-- טאב 1: אימונים -->
     <div id="tabWorkouts">
       <div style="margin-bottom:8px;">
-        <label>ימי השבוע בתוכנית (פריסה מדויקת: אמצע שבוע התאוששות + שישי עצים בסופ"ש):</label>
+        <label>ימי השבוע (מתעדכן אוטומטית לפי היום הנוכחי):</label>
         <div class="sub-tabs" id="userPlanDayTabs"></div>
       </div>
-
-      <div id="warmupBannerBox" class="warmup-banner hidden">
-        <div>
-          <b style="color:var(--accent); display:block;" id="warmupTitleText">חימום</b>
-          <span style="font-size:0.75rem; color:var(--text-muted);" id="warmupDescText">הכנה</span>
-        </div>
-        <a id="warmupVideoLink" href="#" target="_blank" class="btn btn-primary" style="padding:6px 12px; font-size:0.78rem; text-decoration:none;">▶️ וידאו</a>
-      </div>
-
       <div id="activeWorkoutDetails"></div>
-
-      <div id="cooldownSection" class="cooldown-box hidden">
-        <b style="color:#c084fc; font-size:0.9rem;">🧘 שחרור מפרקי (Cool-Down)</b>
-        <div class="cooldown-item"><input type="checkbox" style="width:16px; height:16px;"> סיבובי כתפיים איטיים לאחור</div>
-        <div class="cooldown-item"><input type="checkbox" style="width:16px; height:16px;"> נשימות סרעפת עמוקות</div>
-      </div>
-
-      <button type="button" class="btn btn-success btn-full" style="margin-top:8px;" onclick="promptSaveCurrentWorkout()">💾 סיים ושמור פעילות זו ליומן</button>
+      <button type="button" class="btn btn-success btn-full" style="margin-top:8px;" onclick="promptSaveCurrentWorkout()">💾 סמן אימון כהושלם</button>
     </div>
 
-    <!-- טאב 2: תזונה -->
+    <!-- טאב 2: תזונה מלאה -->
     <div id="tabNutrition" class="hidden">
       <div class="macro-summary-bar">
-        <div class="macro-pill"><div class="val" id="nCal">2000</div><div class="lbl">קלוריות</div></div>
-        <div class="macro-pill"><div class="val" id="nPro">155g</div><div class="lbl">חלבון</div></div>
-        <div class="macro-pill"><div class="val" id="nCarb">180g</div><div class="lbl">פחמימות</div></div>
-        <div class="macro-pill"><div class="val" id="nFat">65g</div><div class="lbl">שומנים</div></div>
+        <div class="macro-pill"><div class="val" id="nCal">0</div><div class="lbl">קלוריות</div></div>
+        <div class="macro-pill"><div class="val" id="nPro">0g</div><div class="lbl">חלבון</div></div>
+        <div class="macro-pill"><div class="val" id="nCarb">0g</div><div class="lbl">פחמימות</div></div>
+        <div class="macro-pill"><div class="val" id="nFat">0g</div><div class="lbl">שומנים</div></div>
       </div>
+
       <div class="exercise-box">
-        <h4>תחנות תזונה יומיות</h4>
-        <p style="font-size:0.85rem; color:var(--text-muted);">ניהול תזונה מודולרי מותאם אישית למשקל הגוף ויעד החלבון היומי.</p>
+        <h4 style="margin:0 0 8px 0;">🛠️ הוספת רכיב למגש התזונה</h4>
+        <div class="grid" style="grid-template-columns: 2fr 1fr;">
+          <input type="text" id="foodNameInput" placeholder="שם רכיב (חזה עוף / טופו / אורז)" list="commonFoodsList">
+          <input type="number" id="foodWeightInput" value="100" placeholder="גרם">
+        </div>
+        <button type="button" class="btn btn-secondary btn-full" onclick="addFoodToStaging()">➕ הוסף רכיב</button>
+        <div id="stagingArea" style="margin-top:8px;"></div>
+        <select id="targetMealSelect" style="margin-top:8px;">
+          <option value="בוקר">ארוחת בוקר / שייק</option>
+          <option value="צהריים">ארוחת צהריים עיקרית</option>
+          <option value="ביניים">ארוחת ביניים</option>
+          <option value="ערב">ארוחת ערב מזינה</option>
+        </select>
+        <button type="button" class="btn btn-success btn-full" style="margin-top:6px;" onclick="commitStaging()">🍽️ העבר לארוחות היום</button>
       </div>
+
+      <div id="mealStationsArea"></div>
     </div>
 
-    <!-- טאב 3: יומן מעקב -->
+    <!-- טאב 3: יומן -->
     <div id="tabHistory" class="hidden">
       <h3>יומן מעקב אחוד</h3>
       <div style="margin-bottom:10px;">
-        <input type="text" id="manualLogName" placeholder="שם אימון לתיעוד ידני (למשל: אימון כוח A)">
-        <button type="button" class="btn btn-primary btn-full" style="margin-top:6px;" onclick="addManualWorkoutLog()">➕ הוסף אימון ליומן</button>
+        <input type="text" id="manualLogName" placeholder="שם אימון/פעילות לתיעוד ידני">
+        <button type="button" class="btn btn-primary btn-full" style="margin-top:6px;" onclick="addManualWorkoutLog()">➕ הוסף ליומן</button>
       </div>
       <div id="unifiedHistoryArea"></div>
     </div>
@@ -286,114 +283,67 @@
 
 </div>
 
+<!-- מאגר מזונות להשלמה אוטומטית -->
+<datalist id="commonFoodsList">
+  <option value="חזה עוף צלוי">
+  <option value="טופו טבעי אפוי">
+  <option value="ביצה קשה / חביתה">
+  <option value="יוגורט פרו PRO 20g">
+  <option value="אורז בסמטי מבושל">
+  <option value="שקדים טבעיים">
+</datalist>
+
 <script>
 const firebaseConfig = {
-  apiKey: "AIzaSyBXTxCBH5DHBpirHyjDgbHVCfOH3HVhxNg",
-  authDomain: "trainapp-d7935.firebaseapp.com",
-  projectId: "trainapp-d7935",
-  storageBucket: "trainapp-d7935.firebasestorage.app",
-  messagingSenderId: "111195834871",
-  appId: "1:111195834871:web:7fdb26b0d4ee2a70efc6f2"
+  apiKey: "AIzaSyBXTxCBH5DHBpirHyjDgbHVCfOH3HVhxNg", authDomain: "trainapp-d7935.firebaseapp.com",
+  projectId: "trainapp-d7935", storageBucket: "trainapp-d7935.firebasestorage.app"
 };
-
 let db = null;
 try { firebase.initializeApp(firebaseConfig); db = firebase.firestore(); } catch (e) {}
 
-// מנוע אלגוריתם תוכנית אימונים דטרמיניסטי (A, B, C, D עם פריסה אופטימלית לסופ"ש)
+// הגדרת מאגר המזונות
+const FOOD_DATABASE = {
+  "חזה עוף צלוי": { cal: 165, pro: 31, carb: 0, fat: 3.6 },
+  "טופו טבעי אפוי": { cal: 140, pro: 16, carb: 3, fat: 8 },
+  "ביצה קשה / חביתה": { cal: 143, pro: 13, carb: 0.7, fat: 9.5 },
+  "יוגורט פרו PRO 20g": { cal: 65, pro: 10, carb: 4, fat: 0.2 },
+  "אורז בסמטי מבושל": { cal: 130, pro: 2.7, carb: 28, fat: 0.3 },
+  "שקדים טבעיים": { cal: 579, pro: 21, carb: 21, fat: 49 }
+};
+
+// פריסה מדויקת - יום שישי הוא אימון D מרכזי!
 function buildPersonalizedPlan(profile) {
   return [
-    {
-      day: "ראשון (A)",
-      name: "אימון כוח A: גב, ישבן וליבה (דגש מנוחת עורף)",
-      isRec: false,
-      warmupTitle: "חימום מפרקי והזרמת דם (5 דק')",
-      warmupDesc: "פתיחת חזה ושחרור טרפזים לפני כניסה למכשיר",
-      warmupUrl: "https://www.youtube.com/results?search_query=5+minute+dynamic+warmup",
-      exercises: [
-        { name: "חתירה בישיבה בכבל (Seated Low Row)", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "הורדת שכמות מטה למניעת כיווץ טרפזים | מנוחה: 90 שניות" },
-        { name: "משיכה עילית לחזה (Lat Pulldown)", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "משיכה לעצם החזה, גו זקוף | מנוחה: 90 שניות" },
-        { name: "גשר ירך בכבל (Cable Glute Bridge)", sets: 3, reps: "12-15", weightNote: "RPE 7-8", notes: "דחיפה מעקבים, עצירה בשיא הכיווץ | מנוחה: 60 שניות" },
-        { name: "לחיצת פאלופ (Pallof Press)", sets: 3, reps: "10 צד", weightNote: "שליטה מלאה", notes: "ליבה עמוקה נגד רוטציה, ללא כפיפה צווארית | מנוחה: 45 שניות" }
-      ]
-    },
-    {
-      day: "שני (R1)",
-      name: "התאוששות אקטיבית / מנוחה",
-      isRec: true,
-      recType: "walking",
-      videoTitle: "הליכה קלה / שחרור מטבולי (NEAT)",
-      videoDesc: "הליכה קלה של 25 דקות להזרמת דם בשרירים",
-      videoUrl: "https://www.youtube.com/results?search_query=active+recovery+routine",
-      tips: ["הפחתת סטרס מטבולי", "יעד חלבון: 155g"]
-    },
-    {
-      day: "שלישי (B)",
-      name: "אימון כוח B: חגורת כתפיים וידיים (IMBODY)",
-      isRec: false,
-      warmupTitle: "חימום חגורת כתפיים ושכמות (5 דק')",
-      warmupDesc: "הנעת מפרקים עדינה ללא עומס צווארי",
-      warmupUrl: "https://www.youtube.com/results?search_query=upper+body+mobility+5+min",
-      exercises: [
-        { name: "לחיצת כתפיים בכבלים / מכשיר", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "שליטה מלאה בירידה | מנוחה: 90 שניות" },
-        { name: "הרחקת כתפיים לצדדים בכבל (Cable Lateral Raise)", sets: 3, reps: "12-15", weightNote: "RPE 7", notes: "תנועה חלקה ומבוקרת | מנוחה: 60 שניות" },
-        { name: "פייס פולס (Face Pulls)", sets: 3, reps: "15", weightNote: "RPE 7", notes: "חיזוק שכמות ואחורי כתף | מנוחה: 60 שניות" },
-        { name: "כפיפת מרפקים (יד קדמית) בכבל", sets: 3, reps: "12", weightNote: "RPE 7-8", notes: "מרפקים צמודים לגוף | מנוחה: 60 שניות" }
-      ]
-    },
-    {
-      day: "רביעי (R2)",
-      name: "התאוששות פעילה / טאי צ'י בוקר",
-      isRec: true,
-      recType: "taichi",
-      videoTitle: "זרימה מתונה ומתיחות (Mobility Flow)",
-      videoDesc: "שחרור טרפזים, צוואר וגב עליון",
-      videoUrl: "https://www.youtube.com/results?search_query=10+min+full+body+mobility",
-      tips: ["מתיחות סטטיות קלות", "נשימות עמוקות"]
-    },
-    {
-      day: "חמישי (C)",
-      name: "אימון כוח C: פלג גוף תחתון מוגן ברך (Box & Glutes)",
-      isRec: false,
-      warmupTitle: "נשימות סרעפתיות וחימום מפרקי ירך",
-      warmupDesc: "הכנת מפרקי הירך והברכיים לעבודה",
-      warmupUrl: "https://www.youtube.com/results?search_query=5+min+core+warmup",
-      exercises: [
-        { name: "סקוואט אל קופסה (Box Squat)", sets: 3, reps: "10-12", weightNote: "RPE 7", notes: "ישיבה לאחור עד מגע עדין, שמירה על פיקה מוגנת | מנוחה: 90 שניות" },
-        { name: "דדליפט רומני מבוקר (RDL)", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "ברכיים כפופות ב-15 מעלות קבוע | מנוחה: 90 שניות" },
-        { name: "הרחקת ירך לאחור בכבל (Cable Glute Kickback)", sets: 3, reps: "12-15", weightNote: "RPE 7-8", notes: "בידוד גלוטס מושלם | מנוחה: 60 שניות" },
-        { name: "כפיפות בטן בכריעה כנגד כבל", sets: 3, reps: "12-15", weightNote: "RPE 7", notes: "קיפול הצלעות לכיוון האגן | מנוחה: 45 שניות" }
-      ]
-    },
-    {
-      day: "שישי (D)",
-      name: "אימון כוח D (סופ\"ש): חזה, זרועות ואיזון שלדי מלא",
-      isRec: false,
-      warmupTitle: "חימום חזה ושכמות דינמי (5 דק')",
-      warmupDesc: "הכנת חגורת הכתפיים והחזה לעצימות גבוהה",
-      warmupUrl: "https://www.youtube.com/results?search_query=dynamic+warmup",
-      exercises: [
-        { name: "לחיצת חזה בכבלים בישיבה (Cable Chest Press)", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "שכמות נעולות לאחור, טמפו 3-1-1 | מנוחה: 90 שניות" },
-        { name: "פרפר בכבלים (Cable Flyes)", sets: 3, reps: "12-15", weightNote: "RPE 7", notes: "מתיחה מבוקרת בנקודה הרחבה | מנוחה: 60 שניות" },
-        { name: "פשיטת מרפקים (יד אחורית) בכבל", sets: 3, reps: "12-15", weightNote: "RPE 7-8", notes: "יציבות מלאה במרפקים | מנוחה: 60 שניות" },
-        { name: "פלאנק סטטי / לחיצת פאלופ מתקדמת", sets: 3, reps: "45 שניות", weightNote: "שליטה", notes: "חיזוק ליבה עמוקה | מנוחה: 45 שניות" }
-      ]
-    },
-    {
-      day: "שבת (R3)",
-      name: "שבת (סופ\"ש): מנוחה מלאה, משפחה וטעינת מצברים",
-      isRec: true,
-      recType: "walking",
-      videoTitle: "זמן איכות ומנוחה מלאה",
-      videoDesc: "ללא אימוני מכשיר — חידוש כוחות מלא לקראת השבוע הבא",
-      videoUrl: "https://www.youtube.com/results?search_query=relaxation+breathing",
-      tips: ["מנוחה פיזית מוחלטת", "תזונה מאוזנת ואיכותית"]
-    }
+    { day: "ראשון (A)", name: "אימון A: גב, ישבן וליבה", isRec: false, warmupTitle: "חימום מפרקי", warmupUrl: "#", exercises: [
+      { name: "חתירה בישיבה בכבל", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "הורדת שכמות מטה | מנוחה: 90 שניות" },
+      { name: "משיכה עילית לחזה", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "גו זקוף | מנוחה: 90 שניות" },
+      { name: "גשר ירך בכבל", sets: 3, reps: "12-15", weightNote: "RPE 7-8", notes: "דחיפה מעקבים | מנוחה: 60 שניות" }
+    ]},
+    { day: "שני (R1)", name: "התאוששות אקטיבית", isRec: true, videoTitle: "הליכה / NEAT", videoDesc: "25 דקות", videoUrl: "#" },
+    { day: "שלישי (B)", name: "אימון B: חגורת כתפיים וידיים", isRec: false, warmupTitle: "חימום עליון", warmupUrl: "#", exercises: [
+      { name: "לחיצת כתפיים בכבלים", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "שליטה בירידה | מנוחה: 90 שניות" },
+      { name: "הרחקת כתפיים", sets: 3, reps: "12-15", weightNote: "RPE 7", notes: "מבוקר | מנוחה: 60 שניות" },
+      { name: "כפיפת מרפקים", sets: 3, reps: "12", weightNote: "RPE 7", notes: "מרפקים צמודים | מנוחה: 60 שניות" }
+    ]},
+    { day: "רביעי (R2)", name: "טאי צ'י ומתיחות", isRec: true, videoTitle: "Mobility Flow", videoDesc: "שחרור גב וצוואר", videoUrl: "#" },
+    { day: "חמישי (C)", name: "אימון C: פלג גוף תחתון (מוגן ברך)", isRec: false, warmupTitle: "חימום מפרקי ירך", warmupUrl: "#", exercises: [
+      { name: "סקוואט אל קופסה (Box Squat)", sets: 3, reps: "10-12", weightNote: "RPE 7", notes: "ישיבה לאחור בעדינות | מנוחה: 90 שניות" },
+      { name: "דדליפט רומני (RDL)", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "ברכיים ב-15 מעלות | מנוחה: 90 שניות" }
+    ]},
+    { day: "שישי (D)", name: "אימון D (סופ\"ש): חזה וזרועות", isRec: false, warmupTitle: "חימום חזה ושכמות", warmupUrl: "#", exercises: [
+      { name: "לחיצת חזה בכבלים בישיבה", sets: 3, reps: "10-12", weightNote: "RPE 7-8", notes: "שכמות נעולות לאחור | מנוחה: 90 שניות" },
+      { name: "פרפר בכבלים", sets: 3, reps: "12-15", weightNote: "RPE 7", notes: "מתיחה מבוקרת | מנוחה: 60 שניות" },
+      { name: "פשיטת מרפקים בכבל", sets: 3, reps: "12-15", weightNote: "RPE 7-8", notes: "יציבות מרפקים | מנוחה: 60 שניות" }
+    ]},
+    { day: "שבת (R3)", name: "שבת (סופ\"ש): מנוחה מלאה", isRec: true, videoTitle: "זמן איכות", videoDesc: "חידוש כוחות", videoUrl: "#" }
   ];
 }
 
 let currentUserId = null;
 let currentUserData = null;
-let currentDayIdx = 0;
+// קביעת היום הנוכחי אוטומטית לפי תאריך! (0=ראשון, 5=שישי)
+let currentDayIdx = new Date().getDay(); 
+let stagingIngredients = [];
 
 function switchAuthMode(mode) {
   document.getElementById('authModeLoginBtn').classList.toggle('active', mode === 'login');
@@ -404,40 +354,24 @@ function switchAuthMode(mode) {
 
 async function loginUser() {
   const u = document.getElementById('authUsername').value.trim();
-  const p = document.getElementById('authPassword').value.trim();
   if (!u) return alert('נא להזין שם משתמש');
-
   let data = null;
-  if (db) {
-    try {
-      const snap = await db.collection('users').doc(u).get();
-      if (snap.exists) data = snap.data();
-    } catch (e) {}
-  }
-
+  if (db) { try { const snap = await db.collection('users').doc(u).get(); if (snap.exists) data = snap.data(); } catch (e) {} }
   if (!data) {
     let local = JSON.parse(localStorage.getItem('imbody_users') || '{}');
-    data = local[u] || { username: u, profile: { name: "שגיא", weight: 85 }, workoutPlan: buildPersonalizedPlan({}), workoutLogs: [] };
+    data = local[u] || { username: u, profile: { name: u, weight: 85 }, workoutPlan: buildPersonalizedPlan({}), workoutLogs: [], nutritionMeals: [] };
   }
-
-  currentUserId = u;
-  currentUserData = data;
-  if (!currentUserData.workoutPlan || currentUserData.workoutPlan.length === 0) {
-    currentUserData.workoutPlan = buildPersonalizedPlan(currentUserData.profile || {});
-  }
-
+  currentUserId = u; currentUserData = data;
+  if (!currentUserData.workoutPlan) currentUserData.workoutPlan = buildPersonalizedPlan(currentUserData.profile || {});
+  if (!currentUserData.nutritionMeals) currentUserData.nutritionMeals = [];
   routeUser();
 }
 
 function registerNewUser() {
   const u = document.getElementById('regUsername').value.trim();
-  const p = document.getElementById('regPassword').value.trim();
-  const pConf = document.getElementById('regPasswordConfirm').value.trim();
-  if (!u || !p) return alert('נא למלא את כל השדות');
-  if (p !== pConf) return alert('הסיסמאות אינן תואמות');
-  
+  if (!u) return alert('נא להזין שם');
   currentUserId = u;
-  currentUserData = { username: u, password: p, profile: { name: u, weight: 80 }, workoutPlan: buildPersonalizedPlan({}), workoutLogs: [] };
+  currentUserData = { username: u, profile: { name: u, weight: 85 }, workoutPlan: buildPersonalizedPlan({}), workoutLogs: [], nutritionMeals: [] };
   routeUser();
 }
 
@@ -446,19 +380,18 @@ function routeUser() {
   document.getElementById('questionnaireScreen').classList.add('hidden');
   document.getElementById('mainDashboard').classList.remove('hidden');
   document.getElementById('dashUsernameTitle').innerText = `מתאמן: ${currentUserData.profile?.name || currentUserId}`;
-
   if (currentUserData.avatar) document.getElementById('userAvatar').src = currentUserData.avatar;
-
+  
   renderUserWorkoutTabs();
   renderActiveWorkout();
+  renderNutrition();
   renderUnifiedHistory();
 }
 
 function renderUserWorkoutTabs() {
   const container = document.getElementById('userPlanDayTabs');
   container.innerHTML = '';
-  const plan = currentUserData.workoutPlan || [];
-  plan.forEach((item, idx) => {
+  currentUserData.workoutPlan.forEach((item, idx) => {
     const btn = document.createElement('div');
     btn.className = `sub-tab ${idx === currentDayIdx ? 'active' : ''} ${item.isRec ? 'rec-tab' : ''}`;
     btn.innerText = item.day;
@@ -469,41 +402,13 @@ function renderUserWorkoutTabs() {
 
 function renderActiveWorkout() {
   const container = document.getElementById('activeWorkoutDetails');
-  const plan = currentUserData.workoutPlan || [];
-  if (!plan[currentDayIdx]) return;
-  const w = plan[currentDayIdx];
-
+  const w = currentUserData.workoutPlan[currentDayIdx];
   if (w.isRec) {
-    document.getElementById('warmupBannerBox').classList.add('hidden');
-    document.getElementById('cooldownSection').classList.add('hidden');
-    container.innerHTML = `
-      <div class="exercise-box" style="border-color:var(--recovery);">
-        <h3 style="color:#a855f7;">${w.name}</h3>
-        <p><b>${w.videoTitle}</b></p>
-        <p style="font-size:0.85rem; color:var(--text-muted);">${w.videoDesc}</p>
-        <a href="${w.videoUrl}" target="_blank" class="btn btn-recovery" style="text-decoration:none; margin-top:6px;">▶️ צפה בסרטון</a>
-      </div>
-    `;
+    container.innerHTML = `<div class="exercise-box" style="border-color:var(--recovery);"><h3 style="color:#a855f7;">${w.name}</h3><p><b>${w.videoTitle}</b></p><p style="font-size:0.85rem; color:var(--text-muted);">${w.videoDesc}</p></div>`;
   } else {
-    document.getElementById('warmupBannerBox').classList.remove('hidden');
-    document.getElementById('cooldownSection').classList.remove('hidden');
-    document.getElementById('warmupTitleText').innerText = w.warmupTitle;
-    document.getElementById('warmupDescText').innerText = w.warmupDesc;
-    document.getElementById('warmupVideoLink').href = w.warmupUrl;
-
     let html = `<h3 style="font-size:1.05rem; margin-bottom:8px;">${w.name}</h3>`;
     (w.exercises || []).forEach(ex => {
-      html += `
-        <div class="exercise-box">
-          <div class="exercise-header-wrap">
-            <div class="exercise-img-thumb"><span>💪</span></div>
-            <div style="flex:1;">
-              <div style="display:flex; justify-content:space-between;"><b style="color:var(--accent);">${ex.name}</b><span>${ex.sets} סטים × ${ex.reps}</span></div>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">עומס: <b>${ex.weightNote}</b> | ${ex.notes}</div>
-            </div>
-          </div>
-        </div>
-      `;
+      html += `<div class="exercise-box"><div class="exercise-header-wrap"><div class="exercise-img-thumb"><span>💪</span></div><div style="flex:1;"><div style="display:flex; justify-content:space-between;"><b style="color:var(--accent);">${ex.name}</b><span>${ex.sets} סטים × ${ex.reps}</span></div><div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">עומס: <b>${ex.weightNote}</b> | ${ex.notes}</div></div></div></div>`;
     });
     container.innerHTML = html;
   }
@@ -514,147 +419,87 @@ function switchTab(id, el) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.remove('hidden');
   if (el) el.classList.add('active');
-  if (id === 'tabHistory') renderUnifiedHistory();
 }
 
-function editQuestionnaire() {
-  document.getElementById('mainDashboard').classList.add('hidden');
-  document.getElementById('questionnaireScreen').classList.remove('hidden');
+/* ================= תזונה ================= */
+function addFoodToStaging() {
+  const name = document.getElementById('foodNameInput').value.trim();
+  const weight = parseFloat(document.getElementById('foodWeightInput').value) || 100;
+  if (!name) return;
+  const dbItem = FOOD_DATABASE[name] || { cal: 100, pro: 10, carb: 10, fat: 5 };
+  const ratio = weight / 100;
+  stagingIngredients.push({ name, weight, cal: dbItem.cal*ratio, pro: dbItem.pro*ratio, carb: dbItem.carb*ratio, fat: dbItem.fat*ratio });
+  document.getElementById('foodNameInput').value = '';
+  renderStaging();
+}
+function renderStaging() {
+  const area = document.getElementById('stagingArea');
+  area.innerHTML = stagingIngredients.map((item, i) => `<div class="item-row"><span>${item.name} (${item.weight}g)</span> <span style="color:var(--accent); font-weight:bold;">${Math.round(item.cal)} קל' | ${Math.round(item.pro)}g חלבון</span> <button type="button" class="del-btn" onclick="stagingIngredients.splice(${i},1); renderStaging();">X</button></div>`).join('');
+}
+function commitStaging() {
+  if (stagingIngredients.length === 0) return;
+  const mealName = document.getElementById('targetMealSelect').value;
+  currentUserData.nutritionMeals.push({ id: Date.now(), name: mealName, items: [...stagingIngredients] });
+  stagingIngredients = []; renderStaging(); renderNutrition(); saveData();
+}
+function renderNutrition() {
+  const area = document.getElementById('mealStationsArea');
+  let tCal=0, tPro=0, tCarb=0, tFat=0;
+  area.innerHTML = (currentUserData.nutritionMeals || []).map((m, mIdx) => {
+    let html = `<div class="exercise-box"><h4>${m.name} <button type="button" class="del-btn" style="float:left;" onclick="currentUserData.nutritionMeals.splice(${mIdx},1); renderNutrition(); saveData();">מחק מנה</button></h4>`;
+    m.items.forEach(i => { tCal+=i.cal; tPro+=i.pro; tCarb+=i.carb; tFat+=i.fat; html += `<div class="item-row"><span>${i.name} (${i.weight}g)</span><span>${Math.round(i.pro)}g חלבון</span></div>`; });
+    return html + `</div>`;
+  }).join('');
+  document.getElementById('nCal').innerText = Math.round(tCal);
+  document.getElementById('nPro').innerText = Math.round(tPro) + 'g';
+  document.getElementById('nCarb').innerText = Math.round(tCarb) + 'g';
+  document.getElementById('nFat').innerText = Math.round(tFat) + 'g';
 }
 
-function cancelQuestionnaireEdit() {
-  document.getElementById('questionnaireScreen').classList.add('hidden');
-  document.getElementById('mainDashboard').classList.remove('hidden');
+/* ================= יומן, סניטציה ושמירה ================= */
+function sanitize(obj) {
+  if (obj === undefined) return null;
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) return obj.map(sanitize);
+  const clean = {};
+  for (let k of Object.keys(obj)) { if (obj[k] !== undefined) clean[k] = sanitize(obj[k]); }
+  return clean;
 }
-
-// פונקציית שמירת שאלון בטוחה לחלוטין מפני undefined
-async function processAndSaveFullQuestionnaire() {
-  const getVal = (id) => document.getElementById(id)?.value?.trim() || "";
-  currentUserData.profile = {
-    name: getVal('p_name') || currentUserId,
-    gender: getVal('p_gender') || 'זכר',
-    age: parseInt(document.getElementById('p_age')?.value) || 47,
-    height: parseInt(document.getElementById('p_height')?.value) || 178,
-    weight: parseFloat(document.getElementById('p_weight')?.value) || 85,
-    waist: getVal('p_waist'),
-    frequency: getVal('p_frequency') || '4-5 ימים בשבוע'
-  };
-  currentUserData.workoutPlan = buildPersonalizedPlan(currentUserData.profile);
-
-  function sanitize(obj) {
-    if (obj === undefined) return null;
-    if (obj === null || typeof obj !== 'object') return obj;
-    if (Array.isArray(obj)) return obj.map(sanitize);
-    const clean = {};
-    for (let k of Object.keys(obj)) {
-      if (obj[k] !== undefined) clean[k] = sanitize(obj[k]);
-    }
-    return clean;
-  }
-
+async function saveData() {
   const cleanData = sanitize(currentUserData);
-
-  if (db) {
-    try { await db.collection('users').doc(currentUserId).set(cleanData, { merge: true }); } catch(e) {}
-  }
+  if (db) { try { await db.collection('users').doc(currentUserId).set(cleanData, { merge: true }); } catch(e){} }
   let local = JSON.parse(localStorage.getItem('imbody_users') || '{}');
   local[currentUserId] = cleanData;
   localStorage.setItem('imbody_users', JSON.stringify(local));
-
-  alert('השאלון והתוכנית נשמרו בהצלחה!');
-  routeUser();
 }
-
 async function promptSaveCurrentWorkout() {
   const w = currentUserData.workoutPlan[currentDayIdx];
-  if (!w) return;
-  const today = new Date().toISOString().split('T')[0];
-  
   if (!currentUserData.workoutLogs) currentUserData.workoutLogs = [];
-  currentUserData.workoutLogs.unshift({
-    id: "log_" + Date.now(),
-    date: today,
-    workoutName: w.name,
-    notes: w.isRec ? "התאוששות" : "אימון כוח בוצע בהצלחה"
-  });
-
-  if (db) {
-    try { await db.collection('users').doc(currentUserId).set({ workoutLogs: currentUserData.workoutLogs }, { merge: true }); } catch(e){}
-  }
-  let local = JSON.parse(localStorage.getItem('imbody_users') || '{}');
-  if (local[currentUserId]) {
-    local[currentUserId].workoutLogs = currentUserData.workoutLogs;
-    localStorage.setItem('imbody_users', JSON.stringify(local));
-  }
-
-  alert("האימון נשמר בהצלחה ליומן המעקב!");
-  renderUnifiedHistory();
+  currentUserData.workoutLogs.unshift({ date: new Date().toISOString().split('T')[0], workoutName: w.name, notes: w.isRec ? "התאוששות" : "בוצע בהצלחה" });
+  await saveData(); alert("האימון נשמר ביומן המעקב!"); renderUnifiedHistory();
 }
-
 async function addManualWorkoutLog() {
   const name = document.getElementById('manualLogName').value.trim();
-  if (!name) return alert('נא להזין שם אימון');
-  const today = new Date().toISOString().split('T')[0];
-
+  if (!name) return;
   if (!currentUserData.workoutLogs) currentUserData.workoutLogs = [];
-  currentUserData.workoutLogs.unshift({
-    id: "log_" + Date.now(),
-    date: today,
-    workoutName: name,
-    notes: "תיעוד ידני"
-  });
-
-  if (db) {
-    try { await db.collection('users').doc(currentUserId).set({ workoutLogs: currentUserData.workoutLogs }, { merge: true }); } catch(e){}
-  }
-  let local = JSON.parse(localStorage.getItem('imbody_users') || '{}');
-  if (local[currentUserId]) {
-    local[currentUserId].workoutLogs = currentUserData.workoutLogs;
-    localStorage.setItem('imbody_users', JSON.stringify(local));
-  }
-
-  document.getElementById('manualLogName').value = '';
-  alert('האימון נוסף ליומן בהצלחה!');
-  renderUnifiedHistory();
+  currentUserData.workoutLogs.unshift({ date: new Date().toISOString().split('T')[0], workoutName: name, notes: "תיעוד ידני" });
+  await saveData(); document.getElementById('manualLogName').value = ''; renderUnifiedHistory();
 }
-
 function renderUnifiedHistory() {
-  const container = document.getElementById('unifiedHistoryArea');
-  if (!container) return;
-  const logs = (currentUserData && currentUserData.workoutLogs) || [];
-  if (logs.length === 0) {
-    container.innerHTML = `<p style="font-size:0.85rem; color:var(--text-muted);">אין עדיין רשומות שמורות ביומן.</p>`;
-    return;
-  }
-  let html = '';
-  logs.forEach(l => {
-    html += `
-      <div class="exercise-box" style="padding:10px; margin-bottom:6px;">
-        <div style="font-weight:bold; color:var(--accent);">📅 ${l.date} — ${l.workoutName}</div>
-        <div style="font-size:0.78rem; color:var(--text-muted);">${l.notes}</div>
-      </div>
-    `;
-  });
-  container.innerHTML = html;
+  const c = document.getElementById('unifiedHistoryArea');
+  const logs = currentUserData.workoutLogs || [];
+  if (logs.length === 0) { c.innerHTML = `<p style="font-size:0.85rem; color:var(--text-muted);">אין רשומות שמורות.</p>`; return; }
+  c.innerHTML = logs.map(l => `<div class="exercise-box" style="padding:10px; margin-bottom:6px;"><div style="font-weight:bold; color:var(--accent);">📅 ${l.date} — ${l.workoutName}</div><div style="font-size:0.78rem; color:var(--text-muted);">${l.notes}</div></div>`).join('');
 }
-
-function logout() {
-  currentUserId = null; currentUserData = null;
-  document.getElementById('mainDashboard').classList.add('hidden');
-  document.getElementById('authScreen').classList.remove('hidden');
+function editQuestionnaire() { document.getElementById('mainDashboard').classList.add('hidden'); document.getElementById('questionnaireScreen').classList.remove('hidden'); }
+function cancelQuestionnaireEdit() { document.getElementById('questionnaireScreen').classList.add('hidden'); document.getElementById('mainDashboard').classList.remove('hidden'); }
+async function processAndSaveFullQuestionnaire() {
+  currentUserData.profile.name = document.getElementById('p_name').value;
+  currentUserData.profile.weight = parseFloat(document.getElementById('p_weight').value);
+  currentUserData.workoutPlan = buildPersonalizedPlan(currentUserData.profile);
+  await saveData(); alert('נשמר בהצלחה!'); routeUser();
 }
-
-async function uploadUserAvatar(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    currentUserData.avatar = e.target.result;
-    document.getElementById('userAvatar').src = currentUserData.avatar;
-    if (db) await db.collection('users').doc(currentUserId).set({ avatar: currentUserData.avatar }, { merge: true });
-  };
-  reader.readAsDataURL(file);
-}
+function logout() { currentUserId=null; currentUserData=null; document.getElementById('mainDashboard').classList.add('hidden'); document.getElementById('authScreen').classList.remove('hidden'); }
 </script>
 </body>
 </html>
